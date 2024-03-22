@@ -21,9 +21,9 @@ interface Props {
 }
 
 const Login = ({ setCurrentPage }: Props) => {
-  var firebaseApp = initializeApp(firebaseConfig);
+  let firebaseApp = initializeApp(firebaseConfig);
 
-  var temp = firebaseApp;
+  const temp = firebaseApp;
   firebaseApp = temp;
 
   const [formData, setFormData] = useState({
