@@ -13,7 +13,6 @@ import {
 } from "firebase/auth";
 import "../Styles/MiscStyles.css";
 import Footer from "./Footer";
-import UploadWindow from "./UploadWindow";
 import NavBar from "./Navbar";
 
 interface Props {
@@ -37,7 +36,7 @@ const Login = ({ setCurrentPage }: Props) => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentPage("home-student");
+        setCurrentPage("home"); // Change the page to "home" after successful login
       }
     });
 
@@ -68,7 +67,7 @@ const Login = ({ setCurrentPage }: Props) => {
   };
 
   const handleNoAccount = () => {
-    setCurrentPage("faculty-login");
+    setCurrentPage("login");
   };
 
   return (
@@ -94,7 +93,7 @@ const Login = ({ setCurrentPage }: Props) => {
           <Grid item xs={12} md={8} lg={4}>
             <Box
               sx={{
-                border: "3px solid #0000ff",
+                border: "3px solid #ff0000",
                 borderRadius: "8px",
                 backgroundColor: "rgba(255,255,255,0.4)",
                 padding: "20px",
@@ -104,12 +103,12 @@ const Login = ({ setCurrentPage }: Props) => {
                 variant="h4"
                 sx={{
                   m: 3,
-                  color: "#03045E",
+                  color: "#FF3311",
                   display: "flex",
                   justifyContent: "center",
                 }}
               >
-                Student Log in
+                Faculty Log in
               </Typography>
               <form onSubmit={handleSubmit}>
                 <TextField
@@ -138,7 +137,7 @@ const Login = ({ setCurrentPage }: Props) => {
                     className="submit"
                     type="submit"
                     onClick={handleSubmit}
-                    style={{ border: "none" }}
+                    style={{ backgroundColor: "#FF3311", border: "none" }}
                   >
                     Login
                   </button>
@@ -158,14 +157,14 @@ const Login = ({ setCurrentPage }: Props) => {
                   <Typography
                     variant="h6"
                     style={{
-                      color: "#03045E ",
+                      color: "#FF3311 ",
                       textDecoration: "underline",
                       cursor: "pointer",
                       fontSize: "1.1em",
                     }}
                     onClick={handleNoAccount}
                   >
-                    Click To Login As Faculty
+                    Click To Login As Student
                   </Typography>
                 </Box>
               </form>
@@ -173,7 +172,6 @@ const Login = ({ setCurrentPage }: Props) => {
           </Grid>
         </Grid>
       </Box>
-      <UploadWindow />
       <Footer />
     </>
   );

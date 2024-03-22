@@ -1,22 +1,24 @@
-/*import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";*/
-
-import "./App.css";
+import { SetStateAction, useState } from "react";
 import NavBar from "./Components/Navbar";
-import UploadWindow from "./Components/UploadWindow";
-import Footer from "./Components/Footer";
 import Login from "./Components/Login";
-//import { SetStateAction } from "react";
+import HomePage from "./Components/HomePage";
+import FacultyLogin from "./Components/FacultyLogin";
+
 function App() {
-  //const [count, setCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState("login");
+
+  const handlePageChange = (page: SetStateAction<string>) => {
+    setCurrentPage(page);
+  };
 
   return (
     <>
-      <NavBar setCurrentPage={() => {}} navItems={[]}></NavBar>
-      <Login setCurrentPage={() => {}} setUserId={() => {}}></Login>
-      <UploadWindow></UploadWindow>
-      <Footer></Footer>
+      <NavBar setCurrentPage={handlePageChange} navItems={[]} />
+      {currentPage === "login" && <Login setCurrentPage={handlePageChange} />}
+      {currentPage === "home-student" && <HomePage />}
+      {currentPage === "faculty-login" && (
+        <FacultyLogin setCurrentPage={handlePageChange} />
+      )}
     </>
   );
 }

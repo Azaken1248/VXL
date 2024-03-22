@@ -14,17 +14,19 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import LogoBlack from "../assets/LogoBlack.png";
+import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth methods
 
 interface Props {
   window?: () => Window;
   setCurrentPage: React.Dispatch<React.SetStateAction<string>>;
   navItems: string[];
+  isLoggedIn?: boolean;
 }
 
 const drawerWidth = 240;
 
 export default function DrawerAppBar(props: Props) {
-  const { window, setCurrentPage, navItems } = props;
+  const { window, setCurrentPage, navItems, isLoggedIn } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -34,6 +36,17 @@ export default function DrawerAppBar(props: Props) {
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
     setMobileOpen(false);
+  };
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        setCurrentPage("login"); // Redirect to login page after logout
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
   };
 
   const drawer = (
@@ -109,6 +122,20 @@ export default function DrawerAppBar(props: Props) {
                 {item}
               </Button>
             ))}
+            {isLoggedIn && ( // Render Logout button only if user is logged in
+              <Button
+                variant="outlined"
+                onClick={handleLogout} // Handle logout
+                sx={{
+                  color: "#000000",
+                  borderColor: "#000000",
+                  fontSize: "1.2em",
+                  marginLeft: "20px",
+                }}
+              >
+                Logout
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
