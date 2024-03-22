@@ -75,7 +75,14 @@ const HomePage = () => {
           navItems={[]}
           isLoggedIn={true}
         ></NavBar>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "20px",
+            overflow: "auto",
+          }}
+        >
           {courses.map((course, index) => (
             <CourseCard
               key={index}

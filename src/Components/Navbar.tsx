@@ -16,6 +16,8 @@ import Button from "@mui/material/Button";
 import LogoBlack from "../assets/LogoBlack.png";
 import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth methods
 
+import "../Styles/Navbar.css";
+
 interface Props {
   window?: () => Window;
   setCurrentPage: React.Dispatch<React.SetStateAction<string>>;
@@ -26,6 +28,13 @@ interface Props {
 const drawerWidth = 240;
 
 export default function DrawerAppBar(props: Props) {
+  const fontFaceStyle = {
+    fontFamily: "'ROG Font'",
+    src: "url('../Fonts/7032-fontps.ttf') format('truetype')",
+    color: "black",
+    fontSize: "1.7rem",
+  };
+
   const { window, setCurrentPage, navItems, isLoggedIn } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -103,6 +112,17 @@ export default function DrawerAppBar(props: Props) {
               style={{ height: "85px", padding: "8px 0" }}
             />
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <span style={fontFaceStyle}>Welcome To VXL</span>
+            <span style={fontFaceStyle}>VXL translates "We Excel"</span>
+          </Box>
           <Box sx={{ display: { xs: "none", sm: "flex" } }}>
             {navItems.map((item) => (
               <Button

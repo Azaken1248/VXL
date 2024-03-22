@@ -3,9 +3,9 @@ import NavBar from "./Components/Navbar";
 import Login from "./Components/Login";
 import HomePage from "./Components/HomePage";
 import FacultyLogin from "./Components/FacultyLogin";
-
+import EntryPage from "./Components/EntryPage";
 function App() {
-  const [currentPage, setCurrentPage] = useState("login");
+  const [currentPage, setCurrentPage] = useState("landing-page");
 
   const handlePageChange = (page: SetStateAction<string>) => {
     setCurrentPage(page);
@@ -14,6 +14,9 @@ function App() {
   return (
     <>
       <NavBar setCurrentPage={handlePageChange} navItems={[]} />
+      {currentPage === "landing-page" && (
+        <EntryPage setCurrentPage={handlePageChange} />
+      )}
       {currentPage === "login" && <Login setCurrentPage={handlePageChange} />}
       {currentPage === "home-student" && <HomePage />}
       {currentPage === "faculty-login" && (

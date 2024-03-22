@@ -4,6 +4,10 @@
   box-shadow: none;
 }
 
+@font-face {
+  font-family: 'ROG Font'; 
+  src: url('../Fonts/7032-fontps.ttf') format('truetype'); 
+}
 
 .navigation-bar {
   display: flex;
