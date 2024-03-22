@@ -6,12 +6,15 @@ import "./App.css";
 import NavBar from "./Components/Navbar";
 import UploadWindow from "./Components/UploadWindow";
 import Footer from "./Components/Footer";
+import Login from "./Components/Login";
+//import { SetStateAction } from "react";
 function App() {
   //const [count, setCount] = useState(0);
 
   return (
     <>
-      <NavBar setCurrentPage={() => {}} navItems={["Login"]}></NavBar>
+      <NavBar setCurrentPage={() => {}} navItems={[]}></NavBar>
+      <Login setCurrentPage={() => {}} setUserId={() => {}}></Login>
       <UploadWindow></UploadWindow>
       <Footer></Footer>
     </>

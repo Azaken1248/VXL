@@ -1,3 +1,15 @@
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
+/*
+PUT FIREBASE CONFIG HERE
+*/
+
+const firebaseConfig = {};
+
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
@@ -25,7 +37,7 @@ const Container = styled("div")({
   padding: "1.3rem",
   marginTop: "30%",
   "@media (max-width: 600px)": {
-    width: "90%", // Adjust width for smaller screens
+    width: "40%",
   },
 });
 
@@ -52,12 +64,23 @@ const FileInfoCell = styled("td")({
 
 export default function InputFileUpload() {
   const [selectedFiles, setSelectedFiles] = React.useState<File[]>([]);
+  const [uploadSuccess, setUploadSuccess] = React.useState(false);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const files = event.target.files;
     if (files) {
       const fileList = Array.from(files);
       setSelectedFiles(fileList);
+
+      // Upload files to Firebase Storage
+      fileList.forEach(async (file) => {
+        const storageRef = ref(storage, "./" + file.name);
+        await uploadBytes(storageRef, file);
+        console.log("File uploaded successfully");
+        setUploadSuccess(true); // Set upload success to true after successful upload
+      });
     }
   };
 
@@ -86,6 +109,7 @@ export default function InputFileUpload() {
           </tbody>
         </FileInfoTable>
       )}
+      {uploadSuccess && <p>Files uploaded successfully!</p>}
       <Button
         component="label"
         role={undefined}
