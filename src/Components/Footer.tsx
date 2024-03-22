@@ -6,6 +6,7 @@ import "../Styles/Footer.css";
 const Footer = () => {
   return (
     <>
+      <hr></hr>
       <footer>
         <div className="left-footer">
           <div className="left-footer-element">

@@ -70,7 +70,12 @@ export default function DrawerAppBar(props: Props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 3, display: { sm: "none" }, color: "#000000" }}
+            sx={{
+              mr: 3,
+              display: { sm: "none" },
+              color: "#000000",
+              margin: "500vh",
+            }}
           >
             <MenuIcon />
           </IconButton>
