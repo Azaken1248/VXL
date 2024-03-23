@@ -1,8 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
@@ -11,18 +7,22 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
+import "../Styles/Login.css";
 import "../Styles/MiscStyles.css";
 import Footer from "./Footer";
 import NavBar from "./Navbar";
+
+import teachericonwhite from "../assets/teachericonwhite.png";
 
 interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Login = ({ setCurrentPage }: Props) => {
-  var firebaseApp = initializeApp(firebaseConfig);
+const FacultyLogin = ({ setCurrentPage }: Props) => {
+  let firebaseApp = initializeApp(firebaseConfig);
 
-  var temp = firebaseApp;
+  const temp = firebaseApp;
   firebaseApp = temp;
 
   const [formData, setFormData] = useState({
@@ -36,27 +36,19 @@ const Login = ({ setCurrentPage }: Props) => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentPage("home"); // Change the page to "home" after successful login
+        setCurrentPage("home-student");
       }
     });
 
     return () => unsubscribe();
   }, [setCurrentPage]);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     try {
       setLoading(true);
-
       const auth = getAuth();
       const { email, password } = formData;
-
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.error("Error during login:", error);
@@ -66,8 +58,13 @@ const Login = ({ setCurrentPage }: Props) => {
     }
   };
 
-  const handleNoAccount = () => {
-    setCurrentPage("login");
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleBackButtonClick = () => {
+    setCurrentPage("landing-page");
   };
 
   return (
@@ -77,104 +74,80 @@ const Login = ({ setCurrentPage }: Props) => {
         navItems={[]}
         isLoggedIn={false}
       ></NavBar>
-      <Box
-        className="container"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          margin: 0,
-          padding: 0,
-        }}
-      >
-        <Grid container justifyContent="center">
-          <Grid item xs={12} md={8} lg={4}>
-            <Box
-              sx={{
-                border: "3px solid #ff0000",
-                borderRadius: "8px",
-                backgroundColor: "rgba(255,255,255,0.4)",
-                padding: "20px",
-              }}
-            >
-              <Typography
-                variant="h4"
-                sx={{
-                  m: 3,
-                  color: "#FF3311",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                Faculty Log in
-              </Typography>
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  fullWidth
-                  label="Email"
-                  variant="outlined"
+      <div className="mainarea">
+        <div className="wtf">
+          <div className="container-x">
+            <div className="icon">
+              <img src={teachericonwhite} alt="Student Icon" />
+              <h2>FACULTY &nbsp;LOGIN</h2>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="input-container">
+                <input
+                  type="text"
+                  id="username"
+                  className="input-field"
+                  placeholder="Username"
                   name="email"
                   value={formData.email}
-                  onChange={handleChange}
-                  required
-                  sx={{ mb: 2 }}
+                  onChange={handleInputChange}
                 />
-                <TextField
-                  fullWidth
-                  label="Password"
-                  variant="outlined"
+              </div>
+              <div className="input-container-two">
+                <br />
+                <input
                   type="password"
+                  id="password"
+                  className="input-field"
+                  placeholder="Password"
                   name="password"
                   value={formData.password}
-                  onChange={handleChange}
-                  required
-                  sx={{ mb: 2 }}
+                  onChange={handleInputChange}
                 />
-                <Box sx={{ display: "flex", justifyContent: "right" }}>
-                  <button
-                    className="submit"
-                    type="submit"
-                    onClick={handleSubmit}
-                    style={{ backgroundColor: "#FF3311", border: "none" }}
-                  >
-                    Login
-                  </button>
-                </Box>
-                {loading && (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginTop: 2,
-                    }}
-                  >
-                    <CircularProgress color="primary" />
-                  </Box>
-                )}
-                <Box>
-                  <Typography
-                    variant="h6"
-                    style={{
-                      color: "#FF3311 ",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                      fontSize: "1.1em",
-                    }}
-                    onClick={handleNoAccount}
-                  >
-                    Click To Login As Student
-                  </Typography>
-                </Box>
-              </form>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+              </div>
+              <div
+                className="submitbutton"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "1.7rem",
+                }}
+              >
+                <button id="buttonsubmit" type="submit">
+                  {loading ? (
+                    <CircularProgress color="inherit" size={24} />
+                  ) : (
+                    "Login"
+                  )}
+                </button>
+              </div>
+            </form>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "1rem",
+              }}
+            >
+              <button
+                onClick={handleBackButtonClick}
+                style={{
+                  fontSize: "1.5rem",
+                  backgroundColor: "transparent",
+                  marginTop: "-2rem",
+                  border: "none",
+                  color: "red",
+                }}
+              >
+                Back
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <Footer />
     </>
   );
 };
 
-export default Login;
+export default FacultyLogin;

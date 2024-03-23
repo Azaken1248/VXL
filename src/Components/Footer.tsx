@@ -1,5 +1,5 @@
 // import React from 'react'
-import logoblack from "../assets/LogoBlack.png";
+import LogoWhite from "../assets/LogoWhite.png";
 import "../Styles/Footer.css";
 //import TransalateButton from "./TransalateButton";
 
@@ -11,23 +11,31 @@ const Footer = () => {
         <div className="left-footer">
           <div className="left-footer-element">
             <h3>Company</h3>
-            <p>• FAQs</p>
-            <p>• About us</p>
-            <p>• Contact us</p>
+            <a href="#">• FAQs</a>
+            <br />
+            <a href="#">• About us</a>
+            <br />
+            <a href="#">• Contact us</a>
+            <br />
           </div>
           <div className="left-footer-element">
             <h3>Services</h3>
-            <p>• Home</p>
-            <p>• Faculty</p>
-            <p>• Student</p>
+            <a href="#">• Home</a>
+            <br />
+            <a href="#">• Faculty</a>
+            <br />
+            <a href="#">• Student</a>
+            <br />
           </div>
           <div className="left-footer-element">
             <h3>Legal</h3>
-            <p>• Terms and conditions</p>
-            <p>• Privacy policy</p>
+            <a href="#">• Terms and conditions</a>
+            <br />
+            <a href="#">• Privacy policy</a>
+            <br />
           </div>
         </div>
-        <img className="right-footer" src={logoblack}></img>
+        <img className="right-footer" src={LogoWhite}></img>
       </footer>
     </>
   );

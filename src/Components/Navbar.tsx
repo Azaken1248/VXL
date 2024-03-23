@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import LogoBlack from "../assets/LogoBlack.png";
+import LogoWhite from "../assets/LogoWhite.png";
 import { getAuth, signOut } from "firebase/auth"; // Import Firebase auth methods
 
 import "../Styles/Navbar.css";
@@ -31,7 +31,7 @@ export default function DrawerAppBar(props: Props) {
   const fontFaceStyle = {
     fontFamily: "'ROG Font'",
     src: "url('../Fonts/7032-fontps.ttf') format('truetype')",
-    color: "black",
+    color: "white",
     fontSize: "1.7rem",
   };
 
@@ -85,7 +85,7 @@ export default function DrawerAppBar(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ backgroundColor: "#FFFFFF" }}>
+      <AppBar component="nav" sx={{ backgroundColor: "#222222" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -95,7 +95,7 @@ export default function DrawerAppBar(props: Props) {
             sx={{
               mr: 3,
               display: { sm: "none" },
-              color: "#000000",
+              color: "#FFFFFF",
               margin: "500vh",
             }}
           >
@@ -107,7 +107,7 @@ export default function DrawerAppBar(props: Props) {
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
             <img
-              src={LogoBlack}
+              src={LogoWhite}
               alt="Logo"
               style={{ height: "85px", padding: "8px 0" }}
             />
@@ -147,8 +147,8 @@ export default function DrawerAppBar(props: Props) {
                 variant="outlined"
                 onClick={handleLogout} // Handle logout
                 sx={{
-                  color: "#000000",
-                  borderColor: "#000000",
+                  color: "white",
+                  borderColor: "white",
                   fontSize: "1.2em",
                   marginLeft: "20px",
                 }}
