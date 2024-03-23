@@ -71,7 +71,7 @@ export default function InputFileUpload() {
 
       // Upload files to Firebase Storage
       fileList.forEach(async (file) => {
-        const storageRef = ref(storage, "./" + file.name);
+        const storageRef = ref(storage, "" + file.name);
         await uploadBytes(storageRef, file);
         console.log("File uploaded successfully");
         setUploadSuccess(true); // Set upload success to true after successful upload

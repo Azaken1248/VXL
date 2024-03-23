@@ -36,7 +36,7 @@ const FacultyLogin = ({ setCurrentPage }: Props) => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentPage("home-student");
+        setCurrentPage("home-faculty");
       }
     });
 

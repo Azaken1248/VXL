@@ -5,6 +5,8 @@ import EmptyImage from "../assets/defaultCourse.png";
 import Calendar from "./Calender";
 import UploadWindow from "./UploadWindow";
 import { Button } from "@mui/material";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 interface Assignment {
   id: number;
@@ -33,7 +35,7 @@ const CommonStyles = {
 const CoursePage: React.FC<CoursePageProps> = ({ setCurrentPage, details }) => {
   const [showUploadWindow, setShowUploadWindow] = useState(false);
   const [assignments, setAssignments] = useState<Assignment[]>([
-    { id: 1, name: "Digital Assigment 1 - Project" },
+    { id: 1, name: "WebDex Submission" },
     { id: 2, name: "Digital Assigment 2 - Report Writing" },
     { id: 3, name: "Digital Assignment 3 - Research Papers" },
   ]);
@@ -50,6 +52,8 @@ const CoursePage: React.FC<CoursePageProps> = ({ setCurrentPage, details }) => {
 
     setShowUploadWindow(true);
   };
+
+  const storageStr = `${""}_${details.courseCode}`;
 
   return (
     <>

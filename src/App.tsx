@@ -5,6 +5,7 @@ import HomePage from "./Components/HomePage";
 import FacultyLogin from "./Components/FacultyLogin";
 import EntryPage from "./Components/EntryPage";
 import CoursePage from "./Components/CoursePage";
+import HomePageFaculty from "./Components/HomePageFaculty";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("landing-page");
@@ -12,6 +13,7 @@ function App() {
   const handlePageChange = (page: SetStateAction<string>) => {
     setCurrentPage(page);
   };
+
   return (
     <>
       <NavBar setCurrentPage={handlePageChange} navItems={[]} />
@@ -20,6 +22,7 @@ function App() {
       )}
       {currentPage === "login" && <Login setCurrentPage={handlePageChange} />}
       {currentPage === "home-student" && <HomePage />}
+      {currentPage === "home-faculty" && <HomePageFaculty />}
       {currentPage === "detailed-view" && (
         <CoursePage
           setCurrentPage={handlePageChange}

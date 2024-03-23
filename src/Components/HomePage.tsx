@@ -199,10 +199,9 @@ const HomePage = () => {
       )}
       {current_page === "course-page" && selectedCourse && (
         <CoursePage
-          current_page={current_page}
           setCurrentPage={setCurrentPage}
           details={{
-            name: selectedCourse.courseName,
+            name: selectedCourse.courseCode,
             courseCode: selectedCourse.courseCode,
             facultyName: "Faculty Name", // Add faculty name here or retrieve it from somewhere
           }}
